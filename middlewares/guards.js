@@ -21,7 +21,7 @@ function isGuest() {
 function isOwner() {
     return (req, res, next) => {
         const userId = req.user?._id;
-        if (res.locals.trip.owner == userId) {
+        if (res.locals.play.author == userId) {
             next();
         } else {
             res.redirect('/auth/login');

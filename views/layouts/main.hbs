@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Express Exam</title>
+    <title>Theater</title>
     <link href="/static/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
@@ -13,9 +13,12 @@
             <a>Theater</a>
             <ul>
                 <li><a href="/">Home </a></li>
+                {{#if username}}
                 <li><a href="/auth/logout">Logout</a></li>
+                {{else}}
                 <li><a href="/auth/login">Login</a></li>
                 <li><a href="/auth/register">Register</a></li>
+                {{/if}}
             </ul>
         </nav>
 

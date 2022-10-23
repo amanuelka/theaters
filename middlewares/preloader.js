@@ -1,11 +1,8 @@
-// const tripService = require('../services/tripService');
+const { getById } = require('../services/playService');
 
 function preload() {
-    return async function (req, res, next){
-        const id = req.params.id;
-        // const trip = await getById(id);
-        // res.locals.trip = trip;
-
+    return async function (req, res, next) {
+        res.locals.play = await getById(req.params.id);
         next();
     };
 }
