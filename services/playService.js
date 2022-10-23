@@ -1,7 +1,12 @@
 const Play = require('../models/Play');
 
-async function getAll() {
-    return Play.find({ isPublic: true }).sort({ createdAt: -1 }).lean();
+async function getAll(orderBy) {
+
+    let sorting = { createdAt: -1 };
+    if (orderBy == 'likes') {
+        sorting = { likesCount: -1 };
+    }
+    return Play.find({ isPublic: true }).sort(sorting).lean();
 };
 
 async function getById(id) {
@@ -29,6 +34,7 @@ async function deleteById(id) {
 async function like(playId, userId) {
     const play = await Play.findById(playId);
     play.liked.push(userId);
+    play.likesCount++;
     return play.save();
 }
 

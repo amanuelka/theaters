@@ -7,7 +7,8 @@ const playSchema = new Schema({
     isPublic: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now() },
     author: { type: Types.ObjectId, ref: 'User' },
-    liked: { type: [Types.ObjectId], ref: 'User', default: [] }
+    liked: { type: [Types.ObjectId], ref: 'User', default: [] },
+    likesCount: { type: Number, default: 0 }
 });
 
 const Play = model('Play', playSchema);
