@@ -29,7 +29,7 @@ playController.get('/:id', async (req, res) => {
 
     if (req.user) {
         play.isAuthor = play.author == req.user._id;
-        play.isLiked = play.liked.find(u => u._id == req.user._id);
+        play.isLiked = play.liked.some(u => u._id == req.user._id);
     }
     res.render('details', { ...play });
 });
@@ -57,10 +57,10 @@ playController.post('/:id/edit', hasUser(), preload(), isOwner(), async (req, re
 playController.get('/:id/like', hasUser(), async (req, res) => {
     const play = await getById(req.params.id);
 
-    if (play.author != req.user._id && play.liked.find(u => u._id == req.user._id) == false) {
+    if (play.author != req.user._id && play.liked.some(u => u._id == req.user._id) == false) {
         await like(req.params.id, req.user._id);
     }
-    res.redirect(`/post/${req.params.id}`);
+    res.redirect(`/play/${req.params.id}`);
 });
 
 module.exports = playController;
